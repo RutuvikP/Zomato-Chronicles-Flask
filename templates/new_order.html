@@ -5,14 +5,24 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
         }
         h1 {
-            text-align: center;
             color: #333;
+            margin-top: 0;
         }
         form {
-            max-width: 400px;
-            margin: 0 auto;
+            margin-top: 20px;
         }
         label {
             display: block;
@@ -48,26 +58,46 @@
         li {
             margin-bottom: 5px;
         }
+        .show-orders-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .show-orders-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
-    <h1>New Order</h1>
-    <form action="/order/new" method="POST">
-        <label for="customer_name">Customer Name:</label>
-        <input type="text" id="customer_name" name="customer_name" required><br>
-        <label for="dish_ids">Dish IDs (comma-separated):</label>
-        <input type="text" id="dish_ids" name="dish_ids" required><br>
-        <div>
-            <p>Available Dishes:</p>
-            <ul>
-                {% for dish in menu %}
-                    {% if dish.availability %}
-                        <li>{{ dish.name }} (ID: {{ dish.id }})</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-        <input type="submit" value="Place Order">
-    </form>
+    <div class="container">
+        <header class="header">
+            <h1>New Order</h1>
+        </header>
+
+        <form action="/order/new" method="POST">
+            <label for="customer_name">Customer Name:</label>
+            <input type="text" id="customer_name" name="customer_name" required><br>
+            <label for="dish_ids">Dish IDs (comma-separated):</label>
+            <input type="text" id="dish_ids" name="dish_ids" required><br>
+            <div>
+                <p>Available Dishes:</p>
+                <ul>
+                    {% for dish in menu %}
+                        {% if dish.availability %}
+                            <li>{{ dish.name }} (ID: {{ dish.id }})</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <input type="submit" value="Place Order">
+        </form>
+
+        <a class="show-orders-button" href="/">Go to Menu</a>
+    </div>
 </body>
 </html>

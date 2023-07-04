@@ -5,18 +5,26 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
         }
         h1 {
-            width: 20%;
-            margin: auto;
-            margin-bottom: 10px;
             color: #333;
+            margin-top: 0;
         }
-        h2{
-            width: 12%;
-            margin: auto;
-            margin-top: 20px;
+        h2 {
             color: #333;
+            margin-top: 30px;
+            text-align: center;
         }
         table {
             border-collapse: collapse;
@@ -32,9 +40,8 @@
             font-weight: bold;
         }
         .add-dish-form {
-            margin: auto;
-            margin-top: 20px;
-            width: 20%;
+            width: 25%;
+            margin: 20px auto;
         }
         .add-dish-form label {
             display: inline-block;
@@ -56,21 +63,11 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-        .add-dish-forminput[type="submit"]:hover {
+        .add-dish-form input[type="submit"]:hover {
             background-color: #45a049;
         }
-        .place-order-button {
-            display: block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-        .place-order-button:hover {
-            background-color: #45a049;
+        .action-buttons {
+            margin-top: 10px;
         }
         .action-buttons a {
             display: inline-block;
@@ -84,62 +81,68 @@
         .action-buttons a:hover {
             background-color: #d32f2f;
         }
+        .place-order-button,
         .show-orders-button {
-            display: block;
+            display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #2196F3;
+            background-color: #4CAF50;
             color: #fff;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
         }
+        .place-order-button:hover,
         .show-orders-button:hover {
-            background-color: #1976D2;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>Zesty Zomato Menu</h1>
+    <div class="container">
+        <header class="header">
+            <h1>Flavor Fusion Menu</h1>
+        </header>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Availability</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for dish in menu %}
-            <tr>
-                <td>{{ dish.id }}</td>
-                <td>{{ dish.name }}</td>
-                <td>{{ dish.price }}</td>
-                <td>{{ dish.availability }}</td>
-                <td class="action-buttons">
-                    <a href="/menu/remove/{{dish.id}}">Remove</a>
-                    <a href="/menu/update_availability/{{dish.id}}/{{dish.availability}}">Toggle Availability</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Availability</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dish in menu %}
+                <tr>
+                    <td>{{ dish.id }}</td>
+                    <td>{{ dish.name }}</td>
+                    <td>{{ dish.price }}</td>
+                    <td>{{ dish.availability }}</td>
+                    <td class="action-buttons">
+                        <a href="/menu/remove/{{dish.id}}">Remove</a>
+                        <a href="/menu/update_availability/{{dish.id}}/{{dish.availability}}">Toggle Availability</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <h2>Add a new dish</h2>
-    <form class="add-dish-form" action="/menu/add" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" step="0.01" min="0" required><br>
-        <label for="availability">Availability:</label>
-        <input type="checkbox" id="availability" name="availability"><br>
-        <input type="submit" value="Add">
-    </form>
+        <h2>Add a New Dish</h2>
+        <form class="add-dish-form" action="/menu/add" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" step="0.01" min="0" required><br>
+            <label for="availability">Availability:</label>
+            <input type="checkbox" id="availability" name="availability"><br>
+            <input type="submit" value="Add">
+        </form>
 
-    <a class="place-order-button" href="/order/new">Place a New Order</a>
-    <a class="show-orders-button" href="/orders">Show All Orders</a>
+        <a class="place-order-button" href="/order/new">Place a New Order</a>
+        <a class="show-orders-button" href="/orders">Show All Orders</a>
+    </div>
 </body>
 </html>
