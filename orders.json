@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "customer_name": "Shubh",
+        "dish_ids": [
+            1,
+            2,
+            3
+        ],
+        "status": "preparing"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Pizza",
+        "price": 250,
+        "availability": true
+    },
+    {
+        "id": 2,
+        "name": "Burger",
+        "price": 70,
+        "availability": true
+    },
+    {
+        "id": 3,
+        "name": "Salad",
+        "price": 30,
+        "availability": true
+    },
+    {
+        "id": 4,
+        "name": "Pasta",
+        "price": 125,
+        "availability": false
+    }
+]

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            width: 20%;
+            margin: auto;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        h2{
+            width: 12%;
+            margin: auto;
+            margin-top: 20px;
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .add-dish-form {
+            margin: auto;
+            margin-top: 20px;
+            width: 20%;
+        }
+        .add-dish-form label {
+            display: inline-block;
+            width: 100px;
+        }
+        .add-dish-form input[type="text"],
+        .add-dish-form input[type="number"],
+        .add-dish-form input[type="checkbox"],
+        .add-dish-form input[type="submit"] {
+            margin-bottom: 10px;
+        }
+        .add-dish-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .add-dish-forminput[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .place-order-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .place-order-button:hover {
+            background-color: #45a049;
+        }
+        .action-buttons a {
+            display: inline-block;
+            margin-right: 5px;
+            padding: 5px 10px;
+            background-color: #f44336;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .action-buttons a:hover {
+            background-color: #d32f2f;
+        }
+        .show-orders-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .show-orders-button:hover {
+            background-color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Zesty Zomato Menu</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Availability</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dish in menu %}
+            <tr>
+                <td>{{ dish.id }}</td>
+                <td>{{ dish.name }}</td>
+                <td>{{ dish.price }}</td>
+                <td>{{ dish.availability }}</td>
+                <td class="action-buttons">
+                    <a href="/menu/remove/{{dish.id}}">Remove</a>
+                    <a href="/menu/update_availability/{{dish.id}}/{{dish.availability}}">Toggle Availability</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Add a new dish</h2>
+    <form class="add-dish-form" action="/menu/add" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" step="0.01" min="0" required><br>
+        <label for="availability">Availability:</label>
+        <input type="checkbox" id="availability" name="availability"><br>
+        <input type="submit" value="Add">
+    </form>
+
+    <a class="place-order-button" href="/order/new">Place a New Order</a>
+    <a class="show-orders-button" href="/orders">Show All Orders</a>
+</body>
+</html>
