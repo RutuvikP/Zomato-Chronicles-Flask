@@ -2,25 +2,29 @@
     {
         "id": 1,
         "name": "Pizza",
-        "price": 250,
-        "availability": true
+        "price": "250",
+        "image": "https://images.pexels.com/photos/11111603/pexels-photo-11111603.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "availability": "true"
     },
     {
         "id": 2,
         "name": "Burger",
         "price": 70,
+        "image": "https://images.pexels.com/photos/16241419/pexels-photo-16241419/free-photo-of-regular-beef-burger.jpeg?auto=compress&cs=tinysrgb&w=600",
         "availability": true
     },
     {
         "id": 3,
         "name": "Salad",
         "price": 30,
+        "image": "https://images.pexels.com/photos/5514819/pexels-photo-5514819.jpeg?auto=compress&cs=tinysrgb&w=600",
         "availability": true
     },
     {
         "id": 4,
         "name": "Pasta",
-        "price": 125,
-        "availability": false
+        "price": "125",
+        "image": "https://images.pexels.com/photos/12667658/pexels-photo-12667658.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "availability": "false"
     }
 ]
