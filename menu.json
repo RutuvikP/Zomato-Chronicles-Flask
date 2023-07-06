@@ -26,5 +26,47 @@
         "price": "125",
         "image": "https://images.pexels.com/photos/12667658/pexels-photo-12667658.jpeg?auto=compress&cs=tinysrgb&w=600",
         "availability": "false"
+    },
+    {
+        "id": 5,
+        "name": "Cup Cake",
+        "price": 25,
+        "image": "https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "availability": "true"
+    },
+    {
+        "id": 6,
+        "name": "Chocolate Cake",
+        "price": 75,
+        "image": "https://images.pexels.com/photos/7381533/pexels-photo-7381533.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "availability": "true"
+    },
+    {
+        "id": 7,
+        "name": "Chocolate Donut",
+        "price": 55,
+        "image": "https://images.pexels.com/photos/2955820/pexels-photo-2955820.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "availability": "true"
+    },
+    {
+        "id": 8,
+        "name": "Cookies",
+        "price": 30,
+        "image": "https://images.pexels.com/photos/5599487/pexels-photo-5599487.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "availability": "true"
+    },
+    {
+        "id": 9,
+        "name": "Vanilla Cookies",
+        "price": 40,
+        "image": "https://images.pexels.com/photos/9447585/pexels-photo-9447585.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "availability": "true"
+    },
+    {
+        "id": 10,
+        "name": "Choco Chips Cookies",
+        "price": 80,
+        "image": "https://images.pexels.com/photos/14571330/pexels-photo-14571330.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "availability": "true"
     }
 ]
