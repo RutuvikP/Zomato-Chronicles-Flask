@@ -5,9 +5,11 @@ import ssl
 import pymongo
 from pymongo import MongoClient
 from bson import json_util
+from flask_socketio import SocketIO, send, emit
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 # Connect to MongoDB Atlas
 client = MongoClient("mongodb+srv://rutuvik:patil@cluster0.yalls5i.mongodb.net/flavorfusion?retryWrites=true&w=majority",ssl=True,ssl_cert_reqs=ssl.CERT_NONE)
@@ -77,7 +79,7 @@ def login():
         user = get_user_by_email(email)
         if user and user['password'] == password:
             return generate_response(message='User logged in successfully', data={'role': user['role'],'email':user['email']})
-
+        
         # If no matching user found, return an error message
         return generate_response(error='Invalid email or password', status_code=401)
 
@@ -138,6 +140,7 @@ def new_order():
                 return generate_response(error='Invalid dish ID or dish not available', status_code=400)
 
         order_id = add_order(customer_name, dish_ids, customer_email)
+        socketio.emit('new_order', {'order_id': order_id}, room='admin')
         return generate_response(message='Order placed successfully', data={'order_id': order_id})
 
 @app.route('/order/update_status', methods=['PUT'])
@@ -146,13 +149,24 @@ def update_status():
     order_id = int(data['order_id'])
     status = data['status']
     if update_order_status(order_id, status):
+        socketio.emit('order_status_update', {'order_id': order_id, 'status': status}, room=data['customer_email'])
         return generate_response(message='Order status updated successfully')
     else:
         return generate_response(error='Invalid order ID', status_code=400)
 
-@app.route('/orders')
-def display_orders():
-    orders = list(orders_collection.find())
+@app.route('/orders/<user_role>/<user_email>')
+def display_orders(user_role,user_email):
+    print(user_email,"email")
+    print(user_role,"role")
+    
+    if user_role == 'admin':
+        # Fetch all orders if the user is an admin
+        orders = list(orders_collection.find())
+    else:
+        # Fetch orders associated with the logged-in user
+        orders = list(orders_collection.find({'customer_email': user_email}))
+
+    print(orders,'orders')
     orders_with_details = []
     for order in orders:
         order_with_details = {}
@@ -175,5 +189,13 @@ def display_orders():
 
     return generate_response(data={'orders': orders_with_details})
 
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app,debug=True)
