@@ -58,12 +58,20 @@ def signup():
         email = data['email']
         password = data['password']
         role = data['role']
+
+        # Check if any required field is missing
+        if not email or not password or not role:
+            return generate_response(error='Missing required fields', status_code=400)
         
         # Check if the user with the given email already exists
         existing_user = get_user_by_email(email)
         if existing_user:
             return generate_response(error='User with this email already exists', status_code=400)
-
+        
+        # Check if the role is valid (e.g., 'user' or 'admin')
+        if role not in ['user', 'admin']:
+            return generate_response(error='Invalid role', status_code=400)
+        
         # Create a new user
         user_id = create_user(email, password, role)
         return generate_response(message='User signed up successfully')
